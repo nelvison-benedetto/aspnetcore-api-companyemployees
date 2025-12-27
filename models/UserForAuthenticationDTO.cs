@@ -1,0 +1,14 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CompanyEmployees.models
+{
+    public record UserForAuthenticationDTO
+    {
+        [Required(ErrorMessage="username is required")]
+        public string? UserName { get; set; }
+
+        [Required(ErrorMessage="password is required")]
+        public string? Password { get; set; }
+
+    }
+}
