@@ -5,10 +5,10 @@ using System.Linq.Expressions;
 
 namespace CompanyEmployees.Repository
 {
-    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class  //abstract, vincolo T deve essere un reference type (here class)(EF funziona solo con reference types come Entity)!!
     {
-        protected RepositoryContext repositoryContext;
-        public RepositoryBase(RepositoryContext repositoryContext) { 
+        protected RepositoryContext repositoryContext;  //protected, xk deve essere accessibile anche ai children
+        public RepositoryBase(RepositoryContext repositoryContext) {  //DependencyInjection (DI)
             this.repositoryContext = repositoryContext;
         }
 
