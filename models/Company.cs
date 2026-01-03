@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-//x use the attributi (le annotazioni tra '[]')
+//x usare le annotazioni  '[]'
 
 namespace CompanyEmployees.models
 {
