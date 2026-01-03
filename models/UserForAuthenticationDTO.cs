@@ -8,7 +8,7 @@ namespace CompanyEmployees.models
         public string? UserName { get; set; }  //here 'set' al posto di 'init' xk è usato x auth/serializzazione/libs esterne ect. anche se 'init' sarebbe piu clean.
 
         [Required(ErrorMessage="password is required")]
-        public string? Password { get; set; }
+        public string? Password { get; set; }  //here 'set' al posto di 'init' xk è usato x auth/serializzazione/libs esterne ect. anche se 'init' sarebbe piu clean.
 
     }
     //è un DTO di input: cioe con i dati che ti invia l'utente tramite un POST/PUT
