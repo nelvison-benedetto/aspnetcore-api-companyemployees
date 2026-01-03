@@ -6,6 +6,5 @@
         IEmployeeService EmployeeService { get; }
         IAuthenticationService AuthenticationService { get; }
 
-
     }
 }
