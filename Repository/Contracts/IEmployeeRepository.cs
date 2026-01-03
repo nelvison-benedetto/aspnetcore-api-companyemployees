@@ -9,6 +9,5 @@ namespace CompanyEmployees.Repository.Contracts
         void CreateEmployeeForCompany(Guid companyId, Employee employee);
         void DeleteEmployee(Employee employee);
 
-
-    }
+    } //x more info how check ICompanyRepository.cs
 }

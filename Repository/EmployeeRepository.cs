@@ -3,11 +3,12 @@ using CompanyEmployees.Repository.Contracts;
 
 namespace CompanyEmployees.Repository
 {
+    //x more info how works check CompanyRepository.cs
+
     public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
     {
         public EmployeeRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
-
         }
 
         public Employee GetEmployee(Guid companyId, Guid id, bool trackChanges)
