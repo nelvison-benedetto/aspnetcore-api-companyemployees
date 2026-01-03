@@ -37,5 +37,6 @@ namespace CompanyEmployees.Configuration
             );
         }
     }
+    //see Configuration/CompanyConfiguration.cs x all info how works this!!
 
 }

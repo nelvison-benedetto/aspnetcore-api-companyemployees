@@ -13,17 +13,20 @@ namespace CompanyEmployees.Repository
         }
 
         public IQueryable<T> FindAll(bool trackChanges) =>
-            !trackChanges ? repositoryContext.Set<T>().AsNoTracking() :
-            repositoryContext.Set<T>();
+            !trackChanges ? 
+            repositoryContext.Set<T>().AsNoTracking() : repositoryContext.Set<T>();
+            //a seconda di che bool gli passi, setta Yes o No il trackingChanges
 
         public IQueryable<T> FindByCondition(Expression<Func<T,bool>> expression, bool trackChanges) =>
                   !trackChanges ? 
                 repositoryContext.Set<T>().Where(expression).AsNoTracking() :
                   repositoryContext.Set<T>().Where(expression);
+            //filtra solo entities che soddifano la condition(expression) e a seconda di che bool gli passi setta Yes o No il trackingChanges. 
 
-        public void Create(T entity)=> repositoryContext.Set<T>().Add(entity);
+        public void Create(T entity) => repositoryContext.Set<T>().Add(entity);
+        //!!aggiunge entity al DbSet<T> di EF, ma salva su DB solo quando fai repositoryContext.SaveChanges() !!
 
-        public void Delete(T entity)=> repositoryContext.Set<T>().Remove(entity);
+        public void Delete(T entity) => repositoryContext.Set<T>().Remove(entity);
 
         public void Update(T entity) => repositoryContext.Set<T>().Update(entity);
 

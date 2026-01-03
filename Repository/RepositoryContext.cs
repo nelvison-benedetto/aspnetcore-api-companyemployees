@@ -15,7 +15,7 @@ namespace CompanyEmployees.Repository
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new CompanyConfiguration());  //add custom configuration x ogni entity
+            modelBuilder.ApplyConfiguration(new CompanyConfiguration());  //SEE Configuration/CompanyConfiguration.cs x info details!!!
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
         }
         //add(inietta w ApplyConfiguration()) regole custom (Fluent API)(e.g.pk composte,lenght strs,relations,vincoli,ect) salvate in un file (e.g.Configuration/CompanyConfiguration.cs) quando EF costruisce il modello della entity
