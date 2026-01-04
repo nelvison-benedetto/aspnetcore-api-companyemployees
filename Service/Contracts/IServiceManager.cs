@@ -4,7 +4,7 @@
     {
         ICompanyService CompanyService { get; }  //read-only
         IEmployeeService EmployeeService { get; }  //read-only
-        IAuthenticationService AuthenticationService { get; }
+        IAuthenticationService AuthenticationService { get; }  //read-only
 
     }
 }

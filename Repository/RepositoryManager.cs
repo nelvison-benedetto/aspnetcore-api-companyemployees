@@ -2,7 +2,7 @@
 
 namespace CompanyEmployees.Repository
 {
-    public sealed class RepositoryManager : IRepositoryManager  //sealed! no childrens!
+    public sealed class RepositoryManager : IRepositoryManager  //sealed, no childrens
     {
         private readonly RepositoryContext _repositoryContext;  //DependencyInjection di RepositoryContext
 
@@ -11,16 +11,19 @@ namespace CompanyEmployees.Repository
         public RepositoryManager(RepositoryContext repositoryContext) {
             _repositoryContext = repositoryContext;
 
-            _companyRepository = new Lazy<ICompanyRepository>(() => new CompanyRepository(_repositoryContext));  //create new 
-            _employeeRepository = new Lazy<IEmployeeRepository>(() => new EmployeeRepository(_repositoryContext));
+            _companyRepository =  new Lazy<ICompanyRepository>( () => new CompanyRepository(_repositoryContext) );  //create new 
+            _employeeRepository = new Lazy<IEmployeeRepository>( () => new EmployeeRepository(_repositoryContext) );
             //cosi sei sicuro che sia _companyRepository sia _employeeRepository usano lo stesso RepositoryContext → garantisce Unit of Work
         }
 
+        //properties
         public ICompanyRepository Company => _companyRepository.Value;
         public IEmployeeRepository Employee => _employeeRepository.Value;
-        //restituiscono il repository concreto (CompanyRepository o EmployeeRepository). se _companyRepository.Value non è ancora stato creato, viene istanziato now.
+        //PROPERTIES w a get;. usa polymorphysm e.g. ICompanyRepository service = new CompanyRepository(); (quindi a compile-time vedy a sx, a run-time vedi type a dx)
+        //quando chiami e.g. var service = repositoryManager.CompanyRepository; allora viene controllato _companyRepository.Value se non esiste allora Lazy crea l’oggetto new CompanyService(repositoryManager, mapper) (here qua sopra usando _companyRepository), SE ESISTE GIA ALLORA RIUTILIZZERA SEMPRE LO STESSO!!
 
-        public void Save()=> _repositoryContext.SaveChanges();
+        //methods
+        public void Save() => _repositoryContext.SaveChanges();
         //tutte le edits fatte ai repos (CompanyRepository e/o EmployeeRepository) vengono persistite nel DB. garantisce che le modifiche siano fatte in un’unica unità di lavoro (Unit of Work)
 
     }
