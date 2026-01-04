@@ -12,6 +12,6 @@ namespace CompanyEmployees.Service.Contracts
 
         void DeleteEmployeeForCompany(Guid companyId, Guid id, bool trackChanges);
 
-
+        //usiamo i DTO x return xk di convention(e anche regola) le Entities NON DEVONO MAI USCIRE DAL BACKEND!!
     }
 }

@@ -11,8 +11,8 @@ namespace CompanyEmployees.Service
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
         public EmployeeService(IRepositoryManager repository, IMapper mapper) { 
-            this._repository = repository;
-            this._mapper = mapper;
+            this._repository = repository;  //DI
+            this._mapper = mapper;  //DI
         }
 
         //public IEnumerable<models.Employee> GetAllEmployees(bool trackChanges)
@@ -28,7 +28,7 @@ namespace CompanyEmployees.Service
             var employeesFromDb = _repository.Employee.GetEmployees(companyId, trackChanges);
             var employeesDTO = _mapper.Map<IEnumerable<EmployeeDTO>>(employeesFromDb);
             return employeesDTO;
-        } //good good good!!
+        }
 
         public EmployeeDTO GetEmployee(Guid companyId, Guid id, bool trackChanges)
         {
@@ -63,7 +63,6 @@ namespace CompanyEmployees.Service
             _repository.Employee.DeleteEmployee(employeeForCompany);
             _repository.Save();
         }
-
 
     }
 }

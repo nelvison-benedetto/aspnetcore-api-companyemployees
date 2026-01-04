@@ -11,8 +11,8 @@ namespace CompanyEmployees.Service
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
         public CompanyService(IRepositoryManager repository, IMapper mapper) { 
-            this._repository = repository;
-            this._mapper = mapper;
+            this._repository = repository;  //DI
+            this._mapper = mapper;  //DI
         }
 
         //original, no DTO
@@ -68,16 +68,13 @@ namespace CompanyEmployees.Service
             var companiesDTO = _mapper.Map<IEnumerable<CompanyDTO>>(companies);
             return companiesDTO;
 
-
         }
         public CompanyDTO GetCompany(Guid companyId, bool trackChanges)  //ok la dto okok
         {
             var company = _repository.Company.GetCompany(companyId, trackChanges);
-
             if (company is null)
                 //throw new Exception($"Company with id {companyId} not found");
                 throw new CompanyNotFoundException(companyId);
-            
             var companyDTO = _mapper.Map<CompanyDTO>(company);
             return companyDTO;
         }
@@ -90,6 +87,6 @@ namespace CompanyEmployees.Service
             var companyToReturn = _mapper.Map<CompanyDTO>(companyEntity);
             return companyToReturn;
         }
-
+        
     }
 }
