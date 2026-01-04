@@ -2,8 +2,8 @@
 {
     public interface IServiceManager
     {
-        ICompanyService CompanyService { get; }
-        IEmployeeService EmployeeService { get; }
+        ICompanyService CompanyService { get; }  //read-only
+        IEmployeeService EmployeeService { get; }  //read-only
         IAuthenticationService AuthenticationService { get; }
 
     }
