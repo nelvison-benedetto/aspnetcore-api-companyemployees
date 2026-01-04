@@ -9,7 +9,7 @@ using System.Text;
 
 namespace CompanyEmployees.Extensions
 {
-    public static class ServiceExtensions  //static, x raggruppare le config tecniche e tenere program.cs pulito!
+    public static class ServiceExtensions  //static (xk intato non deve essere istanziata e contiene extension methods), x raggruppare le config tecniche e tenere program.cs pulito!
     {
         //methd extension
         public static void ConfigureCors(this IServiceCollection services) {
