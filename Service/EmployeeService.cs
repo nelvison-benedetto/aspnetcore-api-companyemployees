@@ -36,8 +36,8 @@ namespace CompanyEmployees.Service
             if (company is null) { throw new CompanyNotFoundException(companyId); }
 
             var employeeFromDb = _repository.Employee.GetEmployee(companyId, id, false);
-            if (employeeFromDb is null)
-                throw new EmployeeNotFoundException(id);
+            if (employeeFromDb is null) { throw new EmployeeNotFoundException(id); }
+            
             var employeeDTO = _mapper.Map<EmployeeDTO>(employeeFromDb);
             return employeeDTO;
         }
@@ -58,8 +58,7 @@ namespace CompanyEmployees.Service
             var company = _repository.Company.GetCompany(companyId, trackChanges);
             if (company is null) { throw new CompanyNotFoundException(companyId); }
             var employeeForCompany = _repository.Employee.GetEmployee(companyId, id, false);
-            if (employeeForCompany is null)
-                throw new EmployeeNotFoundException(id);
+            if (employeeForCompany is null) { throw new EmployeeNotFoundException(id); }
             _repository.Employee.DeleteEmployee(employeeForCompany);
             _repository.Save();
         }
