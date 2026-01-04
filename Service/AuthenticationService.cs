@@ -11,9 +11,10 @@ namespace CompanyEmployees.Service
     {
         private readonly IConfiguration _configuration;
         public AuthenticationService(IConfiguration configuration) {
-            _configuration = configuration;
+            _configuration = configuration;  //DependencyInjection
         }
-        public async Task<bool> ValidateUser(UserForAuthenticationDTO userForAuthenticationDTO)
+
+        public async Task<bool> ValidateUser(UserForAuthenticationDTO userForAuthenticationDTO) //usi 'async' anche se here non usi 'await' xk in futuro puo sempre servire
         {
             //works here sqlconnection + sqlcommand in x exercise che usa .DOTNET
             
@@ -24,14 +25,15 @@ namespace CompanyEmployees.Service
             {
                 return false;
             }
-        }
+        } //è un trial auth. in prj real usi MICROSOFT IDENDITY/db/aspnet idendity/oauth/azure ad
+
         public async Task<string> CreateToken()
         {
             var signingCredentials = GetSigningCredentials();
             var claims = await GetClaims();
             var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-        }
+        } //
 
         private SigningCredentials GetSigningCredentials() {
             var key = "BusinessSecretKeyBusinessSecretKeyBusinessSecretKeyBusinessSecretKey";

@@ -17,7 +17,7 @@ namespace CompanyEmployees.Repository
         }
 
         //properties
-        public ICompanyRepository Company => _companyRepository.Value;
+        public ICompanyRepository Company => _companyRepository.Value; //=> sostituisce gia anche il 'return'
         public IEmployeeRepository Employee => _employeeRepository.Value;
         //PROPERTIES w a get;. usa polymorphysm e.g. ICompanyRepository service = new CompanyRepository(); (quindi a compile-time vedy a sx, a run-time vedi type a dx)
         //quando chiami e.g. var service = repositoryManager.CompanyRepository; allora viene controllato _companyRepository.Value se non esiste allora Lazy crea l’oggetto new CompanyService(repositoryManager, mapper) (here qua sopra usando _companyRepository), SE ESISTE GIA ALLORA RIUTILIZZERA SEMPRE LO STESSO!!
