@@ -5,7 +5,7 @@ using System.Net;
 
 namespace CompanyEmployees.Extensions
 {
-    public static class ExceptionMiddlewareExtensions  //static (xk intato non deve essere istanziata e contiene extension methods), 
+    public static class ExceptionMiddlewareExtensions  //static (xk intato non deve essere istanziata e contiene extension methods),  è un middleware custom
     {
         //global exception handler x tutta l'app
 

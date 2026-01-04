@@ -10,39 +10,41 @@ namespace CompanyEmployees
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            //legge appsettings.json, appsettings.{Environment}.json, configura logging, prepara DI container. here NON PARTE ancora il server.
 
             // Add services to the container.
-            builder.Services.ConfigureCors();  //added
-            builder.Services.ConfigureRepositoryManager();  //added
-            builder.Services.ConfigureServiceManager();  //added
-            builder.Services.ConfigureSqlContext(builder.Configuration);
-            builder.Services.AddAutoMapper(typeof(Program)); //added
-                //mappatura auto
-            //supress apicontroller behaviour - stop auto validation
-            builder.Services.Configure<ApiBehaviorOptions>(options =>
+            builder.Services.ConfigureCors();  //run method in extensions/ServiceExtension.cs
+            builder.Services.ConfigureRepositoryManager();  //run method in extensions/ServiceExtension.cs
+            builder.Services.ConfigureServiceManager();  //run method in extensions/ServiceExtension.cs
+            builder.Services.ConfigureSqlContext(builder.Configuration);  //run method in extensions/ServiceExtension.cs
+            builder.Services.AddAutoMapper(typeof(Program)); //mappatura auto, cerca mapping/MappingProfile.cs nell'assembly e registra IMapper
+
+
+            builder.Services.Configure<ApiBehaviorOptions>(options =>  //supress apicontroller behaviour - stop auto validation
             {
                 options.SuppressModelStateInvalidFilter = true;
                 //obj che lo stato dei model la validita dei dati
             });
+            //!!!! DISATTIVAZIONE VALIDAZIONE AUTO. w [ApiController] se model non valido allora ritorna subito w error 400. invece noi disattiviamo questo default e facciamo if(!ModelState.IsValid){return UnprocessableEntity(ModelState);} in EmployeesController.cs  cosi hai piu controllo
+            //alternativa che invece mettere if(!ModelState.IsValid) ovunque, usa IActionFilter
 
 
-            builder.Services.AddControllers();
-            builder.Services.AddAuthentication();
-            builder.Services.ConfigureJWT(builder.Configuration);  //added
+            builder.Services.AddControllers();  //registra MVC Controllers, abilita routing attributi [HttpGet],[HttpPost],ect
+            builder.Services.AddAuthentication();  //activate
+            builder.Services.ConfigureJWT(builder.Configuration);  //run method in extensions/ServiceExtension.cs
 
+            //ora abbiamo settato tutti i settings x la build!
 
-            //now abbiamo settato tutti i settings x la build!
-            //#########
-
-            var app = builder.Build();
-            app.ConfigureExceptionHandler();  //added
-
+            var app = builder.Build();  //configuriamo l'app, ma non è ancora in ascolto
+            
+            app.ConfigureExceptionHandler();  //run method in extensions/ExceptionMiddlewareExtensions.cs
 
             // Configure the HTTP request pipeline.
 
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
+            app.UseHttpsRedirection();  //forza https (se arriva http redirect a https)
+            
+            app.UseAuthentication();  //legge le credenziali della req, costruisce utente HttpContext.User 
+            app.UseAuthorization();  //DECIDE se l’utente può accedere alla risorsa, lavora w [Authorize] [Authorize(Roles = "admin")] [Authorize(Policy = "MyPolicy")] ect
 
 
             //MIDDLEWARES
@@ -52,7 +54,6 @@ namespace CompanyEmployees
             //    await next.Invoke();
             //    Console.WriteLine("logic after executing Next level");
             //});
-
             //app.Map("/usinmapbranch", builder =>  //questo url finale
             //{
             //    builder.Use(async (context, next) =>
@@ -75,11 +76,11 @@ namespace CompanyEmployees
             //    await context.Response.WriteAsync("Startup from webapi");
             //});
 
-            app.UseCors("CorsPolicy");  //added
-            app.MapControllers();
+            app.UseCors("CorsPolicy");  //usa cors nominata 'CorsPolicy' extensions/ServiceExtensions.cs
+            app.MapControllers();  //mappa [Route] [HttpGet] [HttpPost], senza questo 404 ovunque
 
+            app.Run();  //avvio server
 
-            app.Run();
         }
     }
 }

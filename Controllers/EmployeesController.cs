@@ -52,12 +52,12 @@ namespace CompanyEmployees.Controllers
         [HttpPost]
         public IActionResult CreateEmployeeForCompany(Guid companyId, [FromBody] EmployeeForCreationDTO employee)
         {
-            if (employee is null)  //!!da validare a mano xk in program.cs ho disabilitato il automatic model state validation di [ApiController]!
+            if (employee is null)  //!!DA VALIDARE A MANO in program.css ho disabilitato il automatic model state validation di [ApiController]!!
             {
                 return BadRequest("EmployeeForCreationDTO is null");
             }
-            if (!ModelState.IsValid)
-            {  //added x custom validation in EmployeeForCreationDTO
+            if (!ModelState.IsValid)  //!!DA VALIDARE A MANO in program.css ho disabilitato il automatic model state validation di [ApiController]!!
+            {
                 return UnprocessableEntity(ModelState);
             }
             var employeeToReturn = _service.EmployeeService.CreateEmployeeForCompany(companyId, employee, false);
