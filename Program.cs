@@ -42,10 +42,11 @@ namespace CompanyEmployees
             // Configure the HTTP request pipeline.
 
             app.UseHttpsRedirection();  //forza https (se arriva http redirect a https)
-            
+            app.UseStaticFiles();  //serve file statici direttamente dal server, senza passare dai controller
+            app.UseRouting();  //decide quale endpoint deve gestire la request. in .net moderno è gia integrato dentro MapControllers()/MapGet(), ma cmnq sempre metterlo x chiarezza & compatibilita.
+
             app.UseAuthentication();  //legge le credenziali della req, costruisce utente HttpContext.User 
             app.UseAuthorization();  //DECIDE se l’utente può accedere alla risorsa, lavora w [Authorize] [Authorize(Roles = "admin")] [Authorize(Policy = "MyPolicy")] ect
-
 
             //MIDDLEWARES
             //test again mi sa che questi middleware non sono nella giusta posizione della pipeline
@@ -77,6 +78,7 @@ namespace CompanyEmployees
             //});
 
             app.UseCors("CorsPolicy");  //usa cors nominata 'CorsPolicy' extensions/ServiceExtensions.cs
+
             app.MapControllers();  //mappa [Route] [HttpGet] [HttpPost], senza questo 404 ovunque
 
             app.Run();  //avvio server
