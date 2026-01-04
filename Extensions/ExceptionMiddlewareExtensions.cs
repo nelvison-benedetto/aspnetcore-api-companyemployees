@@ -36,7 +36,5 @@ namespace CompanyEmployees.Extensions
             });
         }
 
-
-
     }
 }
