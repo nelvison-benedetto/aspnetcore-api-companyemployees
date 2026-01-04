@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace CompanyEmployees.ContextFactory
 {
-    //runnata 1 volta, setta tutto. solo x design-time  
     //x design-time, non serve a run-time. usata quando lanci Add-Migration Update-Databases 
     public class RepositoryContextFactory : IDesignTimeDbContextFactory<RepositoryContext>  //added
     {
