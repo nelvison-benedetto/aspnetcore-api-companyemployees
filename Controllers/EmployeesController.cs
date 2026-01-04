@@ -7,13 +7,13 @@ namespace CompanyEmployees.Controllers
 {
     //[Route("api/[controller]")]
     [Route("api/companies/{companyId}/employees")]
-    [ApiController]
+    [ApiController]  //attiva comportamenti auto x le apis, ect binding/validazione auto/ect
     public class EmployeesController : ControllerBase
     {
         private readonly IServiceManager _service;
         public EmployeesController(IServiceManager service)
         {
-            this._service = service;
+            this._service = service;  //DI
         }
 
         //[HttpGet]
@@ -52,7 +52,7 @@ namespace CompanyEmployees.Controllers
         [HttpPost]
         public IActionResult CreateEmployeeForCompany(Guid companyId, [FromBody] EmployeeForCreationDTO employee)
         {
-            if (employee is null)  //da scrivere xk in program.cs ho disabilitato il automatic model state validation dell'api controller!!
+            if (employee is null)  //!!da validare a mano xk in program.cs ho disabilitato il automatic model state validation di [ApiController]!
             {
                 return BadRequest("EmployeeForCreationDTO is null");
             }
@@ -63,7 +63,7 @@ namespace CompanyEmployees.Controllers
             var employeeToReturn = _service.EmployeeService.CreateEmployeeForCompany(companyId, employee, false);
             return CreatedAtRoute("GetEmployeeForCompany",
                 new { companyId, id = employeeToReturn.id },
-                employeeToReturn);
+                employeeToReturn); //restful!! nella respose sul client in section header, vedrai il link per fare il GET alla risorsa appena creata!!
         }
 
         [HttpDelete("{id:guid}")]
