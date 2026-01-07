@@ -5,8 +5,7 @@ namespace CompanyEmployees.Repository.Contracts
 {
     public interface IRepositoryBase<T>  //T quindi entity generica, adattibile per tutte
     {
-        IQueryable<T> FindAll(bool trackChanges);  //Iqueryable better than Inumerable<T> (query gia in memoria)!!
-        //possiamo tracciare i cambiamenti in c#!!
+        IQueryable<T> FindAll(bool trackChanges);  
         IQueryable<T> FindByCondition(Expression<Func<T,bool>> expression, bool trackChanges);
         void Create(T entity);
         void Update(T entity);
