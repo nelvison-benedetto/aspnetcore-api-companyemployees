@@ -7,7 +7,8 @@ namespace CompanyEmployees.Repository
 {
     public class RepositoryContext : DbContext
     {
-        //DbContext è il bridge code c# - Db. DbContext rappresenta una sessione con il database, tiene traccia delle entity (Change Tracker), coordina le query e le operazioni CRUD, gestisce le config del modello (pk, relazioni, vincoli, lunghezze campi, ect), usa il modello EF per tradurre LINQ in SQL
+        //DbContext è il bridge code c# - Db.
+        //DbContext rappresenta una sessione con il database, tiene traccia delle entity (Change Tracker), coordina le query e le operazioni CRUD, gestisce le config del modello (pk, relazioni, vincoli, lunghezze campi, ect), usa il modello EF per tradurre LINQ in SQL
 
         public RepositoryContext(DbContextOptions options) : base(options) {  
         }
@@ -23,8 +24,7 @@ namespace CompanyEmployees.Repository
         //salvate 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        //DbSet<T> è tabella del db, e.g. EF capisce che Companies -> tab db Companies.
-        //il DbSet è il punto di partenza per le query EF!
+        //DbSet<T> rappresenta l'insieme delle entity di un certo tipo, è l'entry point per le query LINQ e le operazioni CRUD su quella entity !!
 
     }
 }
