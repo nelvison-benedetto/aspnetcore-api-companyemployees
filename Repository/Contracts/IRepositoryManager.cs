@@ -2,10 +2,9 @@
 {
     public interface IRepositoryManager
     {
-        ICompanyRepository Company { get; }
-        IEmployeeRepository Employee { get; }
+        ICompanyRepository Company { get; }  //readonly
+        IEmployeeRepository Employee { get; }  //readonly
         void Save();
-
 
     }
 }

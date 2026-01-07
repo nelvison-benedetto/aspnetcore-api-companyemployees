@@ -6,14 +6,14 @@ namespace CompanyEmployees.Repository
     {
         private readonly RepositoryContext _repositoryContext;  //DependencyInjection di RepositoryContext
 
-        private readonly Lazy<ICompanyRepository> _companyRepository;  //Lazy<T> non crea subito Xobj quando viene istanziato this obj, ma lo crea solo quando viene realmente richiesto Xobj
+        private readonly Lazy<ICompanyRepository> _companyRepository;  //Lazy<T> non crea subito Xobj quando viene istanziato this obj, ma lo crea solo quando Xobj viene realmente richiesto 
         private readonly Lazy<IEmployeeRepository>  _employeeRepository;
         public RepositoryManager(RepositoryContext repositoryContext) {
             _repositoryContext = repositoryContext;
 
             _companyRepository =  new Lazy<ICompanyRepository>( () => new CompanyRepository(_repositoryContext) );  //create new 
             _employeeRepository = new Lazy<IEmployeeRepository>( () => new EmployeeRepository(_repositoryContext) );
-            //cosi sei sicuro che sia _companyRepository sia _employeeRepository usano lo stesso RepositoryContext → garantisce Unit of Work
+            //cosi sei sicuro che sia _companyRepository sia _employeeRepository usano lo stesso RepositoryContext -> garantisce Unit of Work
         }
 
         //properties

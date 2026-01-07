@@ -21,10 +21,12 @@ namespace CompanyEmployees.Repository
                   !trackChanges ? 
                 repositoryContext.Set<T>().Where(expression).AsNoTracking() :
                   repositoryContext.Set<T>().Where(expression);
-            //filtra solo entities che soddifano la condition(expression) e a seconda di che bool gli passi setta Yes o No il trackingChanges. 
+        //filtra solo entities che soddifano la condition(expression) e a seconda di che bool gli passi setta Yes o No il trackingChanges. 
+        //repositoryContext.Set<T>() -> rappresenta tutte le righe della tabella T, .Where(expression) -> costruisce un sql usando 'where' (non filtra subito in memory), .AsNoTracking() -> EF quando materializza gli obj NON li traccia, infine ritorna Ritorna IQueryable<T> ma la query non è ancora eseguita!! viene eseguita quando fai e.g. var entities = repository.FindByCondition(...).ToList(); FirstOrDefault() ect
 
         public void Create(T entity) => repositoryContext.Set<T>().Add(entity);
-        //!!aggiunge entity al DbSet<T> di EF, ma salva su DB solo quando fai repositoryContext.SaveChanges() !!
+        //EF fa: aggancia l’entity al DbContext -> imposta il suo EntityState = Added -> la mette nel Change Tracker. //DbSet<T> è una facciata (facade) verso il database
+        //quando fai repositoryContext.SaveChanges() EF fa: guarda il Change Tracker -> trova tutte le entity con stato Added -> genera SQL (INSERT INTO Table (...) VALUES (...)) -> Esegue la query sul DB!
 
         public void Delete(T entity) => repositoryContext.Set<T>().Remove(entity);
 
