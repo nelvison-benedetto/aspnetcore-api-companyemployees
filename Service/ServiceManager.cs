@@ -14,9 +14,8 @@ namespace CompanyEmployees.Service
         //remember quando inietti usi sempre le interfaces Ixxx x loose-couplig, easy x tests, easy da sostituire in futuro. e.g. test reale (w concreto sarebbe impossibile)
             //ICompanyService fakeService = new FakeCompanyService();
 
-
         public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IConfiguration configuration) {
-            _companyService =  new Lazy<ICompanyService>( () => new CompanyService(repositoryManager, mapper) );  //inizializzazione obj. è per questo che ci sono 2 Lazy, è come creare List<string> xx = new List<string>() !
+            _companyService =  new Lazy<ICompanyService>( () => new CompanyService( repositoryManager, mapper ) );  //inizializzazione obj. è per questo che ci sono 2 Lazy, è come creare List<string> xx = new List<string>() !
             //registra come creare obj, verrà creata solo alla prima chiamata
             _employeeService =  new Lazy<IEmployeeService>( () => new EmployeeService(repositoryManager, mapper) );
             _authenticationService =  new Lazy<IAuthenticationService>( () => new AuthenticationService(configuration) );

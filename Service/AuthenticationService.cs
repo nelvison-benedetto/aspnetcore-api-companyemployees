@@ -30,9 +30,9 @@ namespace CompanyEmployees.Service
 
         public async Task<string> CreateToken() 
         {
-            var signingCredentials = GetSigningCredentials();
-            var claims = await GetClaims();
-            var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
+            var signingCredentials = GetSigningCredentials();  //see method below
+            var claims = await GetClaims();  //**
+            var tokenOptions = GenerateTokenOptions(signingCredentials, claims);  //**
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         } //crea un JWT firmato e lo return
         //GetSigningCredentials() -> GetClaims() -> GenerateTokenOptions() -> return
