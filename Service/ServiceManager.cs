@@ -27,7 +27,7 @@ namespace CompanyEmployees.Service
         public IAuthenticationService AuthenticationService => _authenticationService.Value;
         //PROPERTIES w a get;. usa polymorphysm e.g. ICompanyService service = new CompanyService(); (quindi a compile-time vedy a sx, a run-time vedi type a dx)
         //quando chiami e.g. var service = serviceManager.CompanyService; allora viene controllato _companyService.Value se non esiste allora Lazy crea l’oggetto new CompanyService(repositoryManager, mapper) (here qua sopra usando _companyService), SE ESISTE GIA ALLORA RIUTILIZZERA SEMPRE LO STESSO!!
-
+        
     }
     //x non dover iniettare nel controller(o dove vuoi utilizzarli) tutti gli IServiceX a mano, invece inietti 1 singolo IServiceManager service. scalabile e performante.
 
