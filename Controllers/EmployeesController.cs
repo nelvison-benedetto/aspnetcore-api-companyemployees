@@ -56,7 +56,7 @@ namespace CompanyEmployees.Controllers
             {
                 return BadRequest("EmployeeForCreationDTO is null");
             }
-            if (!ModelState.IsValid)  //!!DA VALIDARE A MANO in program.css ho disabilitato il automatic model state validation di [ApiController]!!
+            if (!ModelState.IsValid)  //!!DA VALIDARE A MANO in program.cs ho disabilitato il automatic model state validation di [ApiController]!!
             {
                 return UnprocessableEntity(ModelState);
             }

@@ -22,9 +22,10 @@ namespace CompanyEmployees.Controllers
                 return Unauthorized();
             }
             return Ok(new { Token = _service.AuthenticationService.CreateToken() });
+            //e.g. {"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."}
         }
         //ora test su potsman fai un POST a api/authentication/login e in body row json: "username":"user1", "password": "pwd1" e sempre header : Content-Type: application/json
         //header in postman  Authorization : Beare <MyToken>
-        
+
     }
 }
