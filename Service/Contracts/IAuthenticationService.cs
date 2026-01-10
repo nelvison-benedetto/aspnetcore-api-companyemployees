@@ -11,6 +11,5 @@ namespace CompanyEmployees.Service.Contracts
 
         Task<string> CreateToken();
 
-
     }
 }

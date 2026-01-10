@@ -20,7 +20,7 @@ namespace CompanyEmployees.ContextFactory
             //specifici che Db è SQL Server, dici di usare al connection str called 'sqlConnection', specifici che le migratios stanno in CompanyEmployees
 
             return new RepositoryContext(builder.Options);
-            //ora EF leggere il modello, generare migrations, creare Db (CODE-FIRST (ma x big prjs meglio DB-FIRST!!))
+            //ora EF leggere il modello, generare migrations, creare Db (CODE-FIRST (ma x big prjs meglio DB-FIRST (lo fai sempre con EF oppure dapper(x pro) )!!))
             
         }
     }

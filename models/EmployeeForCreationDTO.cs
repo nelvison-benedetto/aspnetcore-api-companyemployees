@@ -4,7 +4,7 @@ namespace CompanyEmployees.models
 {
     //public record EmployeeForCreationDTO(string Name, int Age, string Position)
     //{
-    //} records compatti non supportano bene DataAnnotations sui parametri!meglio farlo bene dettagliato
+    //} records compatti non supportano bene DataAnnotations sui parametri!!!meglio farlo bene dettagliato
 
     public record EmployeeForCreationDTO
     {
