@@ -24,12 +24,16 @@ namespace CompanyEmployees.models
 
         [ForeignKey(nameof(Company))]  //fk x link Employee-Company
         public Guid CompanyId { get; set; }  //Guid xk anche Company.Id è Guid
-        
 
         //navigation properties
         public Company? Company { get; set; }  //navigation property, serve x fare e.g. employee.Company.Name  !! molto utile!!
           //OBBLIGATORIA xk qui c'è la fk CompanyId
 
+        //methods 
+        public override string ToString()
+        {
+            return $"[Employee: Id={Id}, Name={Name}, Age={Age}, Position={Position}, CompanyId={CompanyId}]";
+        }
 
     }
 }

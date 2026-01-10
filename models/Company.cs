@@ -21,10 +21,16 @@ namespace CompanyEmployees.models
 
         public string? Country { get; set; }
 
-        
+        //foreign keys
+
         //navigation properties
         public ICollection<Employee>? Employees { get; set; }  //? xk a runtime puo essere null (EF carica solo tab company), poi cmnq quando loads a richiesta allora gli employees non saranno piu null
         //relation one-to-many con Employee, una company ha molti employees. ora puoi fare company.Employees
 
+        //methods
+        public override string ToString()
+        {
+            return $"[Company: Id={Id}, Name={Name}, Address={Address}, Country={Country}]";
+        }
     }
 }
