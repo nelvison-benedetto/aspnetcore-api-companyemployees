@@ -13,7 +13,7 @@ namespace CompanyEmployees
             //legge appsettings.json, appsettings.{Environment}.json, configura logging, prepara DI container. here NON PARTE ancora il server.
 
             // Add services to the container.
-            builder.Services.ConfigureCors();  //run method in extensions/ServiceExtension.cs
+            builder.Services.ConfigureCors();  //run method in extensions/ServiceExtension.cs  (è un custom METHOD EXTENSION)
             builder.Services.ConfigureRepositoryManager();  //run method in extensions/ServiceExtension.cs
             builder.Services.ConfigureServiceManager();  //run method in extensions/ServiceExtension.cs
             builder.Services.ConfigureSqlContext(builder.Configuration);  //run method in extensions/ServiceExtension.cs
