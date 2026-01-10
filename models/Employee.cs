@@ -20,6 +20,8 @@ namespace CompanyEmployees.models
         [MaxLength(20, ErrorMessage = "employee position max length 20 chars")]
         public string? Position { get; set; }
 
+        //foreign keys
+
         [ForeignKey(nameof(Company))]  //fk x link Employee-Company
         public Guid CompanyId { get; set; }  //Guid xk anche Company.Id è Guid
         
