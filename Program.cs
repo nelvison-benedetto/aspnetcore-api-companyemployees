@@ -100,6 +100,17 @@ namespace CompanyEmployees
 
             app.Run();  //avvio server
 
+
+            /*
+             POSTMAN
+                https://localhost:5001/api/companies    //GET companies ok
+                https://localhost:5001/api/companies/3d490a70-94ce-4d15-9494-5248280c2ce3   //GET single company ok
+                https://localhost:5001/api/companies/c9d4c053-49b6-410c-bc78-2d54a9991870/employees   //GET all employees of target company ok
+                https://localhost:5001/api/companies/c9d4c053-49b6-410c-bc78-2d54a9991870/employees/86dba8c0-d178-41e7-938c-ed49778fb52c   //GET target employee of target company (ma prima questo employee devo crearlo)
+
+                https://localhost:5001/api/companies/43148C69-B6A1-45FF-B88E08DE3F05018D/employees
+             */
+
         }
     }
 }
